@@ -76,31 +76,24 @@ class BancoDeDados {
 
   void criar () async {
     database = await openDatabase(
-      // Set the path to the database. Note: Using the `join` function from the
-      // `path` package is best practice to ensure the path is correctly
-      // constructed for each platform.
       join (await getDatabasesPath(), 'BD.db'),
       onCreate: (db, version) {
-        // Run the CREATE TABLE statement on the database.
         return db.execute(
           "CREATE TABLE professores(matricula INTEGER PRIMARY KEY, nome TEXT)",
         );
         return db.execute(
-          "CREATE TABLE cursos(id INTEGER PRIMARY KEY, nome TEXT)",
+          "CREATE TABLE professores(matricula INTEGER PRIMARY KEY, nome TEXT)",
         );
         return db.execute(
-          "CREATE TABLE cursos(id INTEGER PRIMARY KEY, nome TEXT)",
+          "CREATE TABLE cursos(matricula INTEGER PRIMARY KEY, nome TEXT)",
         );
         return db.execute(
           "CREATE TABLE alunos(matricula INTEGER PRIMARY KEY, nome TEXT)",
         );
         return db.execute(
-          "CREATE TABLE disciplinas(id INTEGER PRIMARY KEY, nome TEXT)",
+          "CREATE TABLE disciplinas(matricula INTEGER PRIMARY KEY, nome TEXT)",
         );
       },
-      
-      // Set the version. This executes the onCreate function and provides a
-      // path to perform database upgrades and downgrades.
       version: 1,
     );
   }
@@ -614,12 +607,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 Tab(
                   child:
-                    Text("Listar Alunos")
+                    Text("Alunos")
                 ),
                 
                 Tab(
                   child:
-                    Text("Listar Professores")
+                    Text("Professores")
                 ),
 
                 Tab(
@@ -683,7 +676,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
               ListView(
                 padding: EdgeInsets.all(16.0),
-                children: tabelaCursos,
+                children: tabelaAlunos,
               ),
 
               ListView(
